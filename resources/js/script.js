@@ -13,7 +13,7 @@ $(document).ready(function() {
             $('nav').removeClass('sticky');
         }
     }, {
-        offset: '60px;' /* this event will occur 60px before the section-features*/
+        offset: '110px;' /* this event will occur 60px before the section-features*/
     });
     
     /* Scroll on the buttons */

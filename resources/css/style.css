@@ -1,0 +1,775 @@
+/* ---------------------------------------------------*/
+/* colorful hoja animation */
+/* ---------------------------------------------------*/
+
+/* ---------------------------------------------------*/
+/* Rocket animation SETUP */
+/* ---------------------------------------------------*/
+.container-rocket{
+	width: 300px;
+	height:300px;
+	margin: 0 auto;
+	position:relative;
+	overflow:hidden;
+
+}
+
+.planet{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:url(http://demo.tutorialzine.com/2013/10/css3-features-you-can-finally-use/assets/img/planet.png) no-repeat center center;
+}
+
+.rocket{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:url(http://demo.tutorialzine.com/2013/10/css3-features-you-can-finally-use/assets/img/rocket.png) no-repeat 50px center;
+
+	/* Chrome still requires the -webkit- prefix */
+	-webkit-animation:orbit 2s linear infinite;
+	animation:orbit 2s linear infinite;
+
+	transition:background-position 0.8s;
+}
+
+.container-rocket:hover .rocket{
+	background-position:80px center;
+}
+
+/* Define the keyframes of the animation */
+
+@-webkit-keyframes orbit {
+	from {
+		-webkit-transform:rotate(0deg);}
+	to {
+		-webkit-transform:rotate(360deg);
+	}
+}
+
+@keyframes orbit {
+	from {
+		transform:rotate(0deg);
+
+		/* I am including the -webkit-transform properties, because
+		   Chrome might start supporting keyframe without prefix in the future,
+		   but we can't be certain whether it will support prefix-free transform
+		   at the same time */
+
+		-webkit-transform:rotate(0deg);}
+	to {
+		transform:rotate(360deg);
+		-webkit-transform:rotate(360deg);
+	}
+}
+
+
+/* ---------------------------------------------------*/
+/* BASIC SETUP */
+/* ---------------------------------------------------*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    background-color: #fff; /*background is white*/
+    color: #555;
+    font-family: 'Lato', 'Arial', sans-serif; /*if Lato cannot be displayed due to no browser connection use arieal*/
+    font-weight: 300; /*Choose 100 200 and 300 from lato in google fonts*/
+    font-size: 20px;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden; /*Added when creating media queries makes the items that go off the screen hidden so the screen doesnt have horizontal scroll*/
+}
+
+.clearfix {zoom: 1}
+.clearfix:after {
+    content: '.';
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+/* ---------------------------------------------------*/
+/* REUSABLE COMPONENETS */
+/* ---------------------------------------------------*/
+
+/*grid setup*/
+.row {
+    max-width: 1140px; /*Defining max width for responsive layout*/
+    margin: 0 auto; /* (top/bottom) (left/rightset) right and left margin to auto*/    
+}
+
+/*preserve background my using */
+section {
+    padding: 80px 0;
+    
+}
+
+/* ---------------------------------------------------*/
+/* HEADER */
+/* ---------------------------------------------------*/
+
+header {
+    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(images/outer_space.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(images/outer_space.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /*make 100% of the view port*/
+    background-attachment: fixed;
+}
+
+.logo {
+    height: 150px;
+    width: auto;
+    float: left;
+    margin-top: 30px;
+}
+
+.logo-black {
+    display: none; /* hide the image in the normal state*/
+    height: 100px;
+    width: auto;
+    float: left;
+    margin: 5px 0;
+}
+
+/* main navigation*/
+.main-nav {
+    float: right;
+    list-style: none; /*removes bullet points*/
+    margin-top: 55px;
+}
+
+.main-nav li {
+    display: inline-block; /* Sets the list elements side by side*/
+    margin-left: 40px;
+}
+
+.main-nav li a:link,
+.main-nav li a:visited {
+    padding: 8px 0;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 90%;
+    border-bottom: 2px solid transparent;
+    -webkit-transition: border-bottom 0.2s;
+    transition: border-bottom 0.2s;
+}
+
+.main-nav li a:hover,
+.main-nav li a:active {
+    border-bottom: 2px solid #e67e22;
+}
+
+/*sticky navigation */
+.sticky {
+    position: fixed; /* nav statys at same point*/
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 2px 2px #efefef;
+    z-index: 9999; /*brings items to the front*/
+}
+
+.sticky .main-nav {
+    margin-top:  18px;
+}
+
+.sticky .main-nav li a:link,
+.sticky .main-nav li a:visited {
+    padding: 16px 0;
+    color: #555;
+}
+
+/* hide white logo and show black*/
+.sticky .logo {
+    display: none;
+}
+.sticky .logo-black {
+    display: block;
+}
+
+/*  mobile navigation */
+.mobile-nav-icon {
+    float: right;
+    margin-top: 30px;
+    cursor: pointer;
+    display: none;
+}
+
+.mobile-nav-icon i {
+    font-size: 200%;
+    color: #fff;
+}
+
+
+.hero-text-box {
+    position: absolute; /*dont use the grid because we want this image to stay put*/
+    width: 1140px;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.profile-picture {
+    height: 200px;
+    border-radius: 50%;
+    vertical-align: middle;
+    display:block;
+    margin-left: 40%;
+    margin-bottom: 10px;
+}
+
+h1, h2, h3 {
+    font-weight: 300;
+    text-transform: uppercase;
+    word-spacing: 3px;
+    
+}
+
+h1 {
+    margin-top: 0; /*removes margin on top of view port*/
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 240%; /*This will be 40px because thats double 20px defined in html*/ 
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-size: 180%;
+    word-spacing: 2px;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+h2:after {
+    display: block;
+    height: 2px;
+    background-color: #e67e22;
+    content: " "; /*Need this content section when specifying after*/ 
+    width: 100px;
+    margin: 0 auto; /*Centers the line*/
+    margin-top: 30px;
+}
+
+h3 {
+    font-size: 110%;
+    margin-bottom: 15px;
+}
+
+
+/* ---------- PARAGRAHPS -----------*/
+
+.long-copy {
+    line-height: 145%;
+    width: 70%;
+    margin-left: 15%; 
+}
+
+
+.section-features .long-copy {
+    margin-bottom: 30px;
+}
+
+/* ------links ------------*/
+
+a:link,
+a:visited {
+    color: #e67e22;
+    text-decoration: none;
+    padding-bottom: 1px;
+    border-bottom: 1px solid #e67e22;
+    -webkit-transition: border-bottom 0.2s, color 0.2s;
+    transition: border-bottom 0.2s, color 0.2s;
+}
+
+a:hover,
+a:active {
+    color: #555;
+    text-decoration: none;
+    padding-bottom: 1px;
+    border-bottom: 1px solid transparent;
+}
+
+
+/* ----- ICONS ------ */
+
+.icon-big {
+    font-size: 350%;
+    display: block; /*Makes the items size as big as the block its inside*/
+    color: #e67e22;
+    margin-bottom: 10px;
+}
+
+.icon-small {
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    color: #e67e22;
+    font-size: 120%;
+    
+    /*secrets to align text and icons*/
+    line-height: 120%;
+    vertical-align: middle;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+
+/* ----------BUTTONS--------- */
+
+/*include both of these so the button looks the same when its been visited*/
+.btn:link,
+.btn:visited,
+input[type=submit]{
+    display: inline-block; /*lets us give link some padding*/
+    padding: 10px 30px;
+    font-weight: 300;
+    text-decoration: none; /*gets rid of line on link*/
+    border: 1px;
+    border-radius: 200px;
+    border: 1px solid #e67e22;
+    -webkit-transition: background-color 0.2s, border 0.2s, color 0.2s;
+    transition: background-color 0.2s, border 0.2s, color 0.2s; /*the background color wont change instantaneously but in .2 seconds*/
+}
+
+.btn-full:link,
+.btn-full:visited,
+input[type=submit] {
+    background-color: #e67e22; /*flatuicolors.com*/
+    color: #fff;
+    margin-right: 15px;
+}
+
+.btn-ghost:link,
+.btn-ghost:visited {
+    color: #e67e22;
+}
+
+/*find a darker shade of the button when hovering (use 0to255.com to find correct tone) */
+.btn:hover,
+.btn:active,
+input[type=submit]:hover,
+input[type=submit]:active {
+    background-color: #cf6d17;
+}
+
+.btn-full:hover,
+.btn-full:active,
+input[type=submit] {
+    border: 1px solid #cf6d17;
+}
+
+.btn-ghost:hover,
+.btn-ghost:active {
+    border: 1px solid #cf6d17;
+    color: #fff;
+}
+
+.box {
+    padding: 1%;   
+}
+
+.box p {
+    font-size: 90%;
+    line-height: 145%;
+}
+
+
+/* ---------------------------------------------------*/
+/* MEALS */
+/* ---------------------------------------------------*/
+
+.section-meals {
+    padding: 0;
+}
+.meals-showcase {
+    list-style: none;
+    width: 100%; /* we want the whole browser width*/
+    
+}
+
+.meals-showcase-vertical {
+    list-style: none;
+    width: 100%; /* we want the whole browser width*/
+     margin-left: -20px;
+    padding-bottom: 10px;
+}
+
+.meals-showcase li {
+    display: block;
+    float:left;
+    width: 25%;
+}
+
+.meals-showcase-vertical li{
+    display: block;
+    float:left;
+    width: 20%;
+}
+
+.meal-photo {
+    width: 100%;
+    margin: 0; 
+    background-color: #000;
+    overflow: hidden; /*if an item inside the container is too big it will hide the extra parts*/
+}
+.meal-photo img {
+    opacity: 0.7;
+    width: 100%;
+    height: auto;
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15);
+    -webkit-transition: opactiy 0.5s, -webkit-transform 0.5s;
+    transition: opactiy 0.5s, -webkit-transform 0.5s;
+    transition: transform 0.5s, opactiy 0.5s;
+    transition: transform 0.5s, opactiy 0.5s, -webkit-transform 0.5s; /* Take half sec to transform*/
+}
+
+.img-vertical img {
+    opacity: 0.7;
+    width: 115%;
+    height: 100%;
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15);
+    -webkit-transition: opactiy 0.5s, -webkit-transform 0.5s;
+    transition: opactiy 0.5s, -webkit-transform 0.5s;
+    transition: transform 0.5s, opactiy 0.5s;
+    transition: transform 0.5s, opactiy 0.5s, -webkit-transform 0.5s; /* Take half sec to transform*/
+}
+
+.meal-photo img:hover {
+    -webkit-transform: scale(1.03);
+    transform: scale(1.03);
+    opacity: 1;
+}
+
+.img-vertical {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+    width: 120%;
+}
+
+/* ---------------------------------------------------*/
+/* HOW IT WORKS */
+/* ---------------------------------------------------*/
+
+
+.section-steps {
+    background-color: #f4f4f4;
+}
+.steps-box:first-child {
+    text-align: right;
+    padding-right: 3%;
+    margin-top: 30px;
+}
+
+.steps-box:last-child {
+    padding-left: 3%;
+    margin-top: 70px;
+}
+
+.app-screen {
+    width: 40%;
+}
+
+.work-step {
+    margin-bottom: 50px;
+}
+
+work-step:last-of-type {
+    margin-bottom: 80px;
+}
+
+.work-step div {
+    color: #e67e22;
+    border: 2px solid #e67e22;
+    display: inline-block; /*inline block doesnt force item line break*/
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
+    text-align: center;
+    padding: 5px;
+    float: left;
+    font-size: 150%;
+    margin-right: 25px;
+}
+
+.btn-app:link,
+.btn-app:visited {
+    border: 0;
+}
+.btn-app img {
+    height: 50px;
+    width: auto;
+    margin-right: 10px;
+}
+
+/* ---------------------------------------------------*/
+/* HOW IT WORKS */
+/* ---------------------------------------------------*/
+
+.box img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.city-feature {
+    margin-bottom: 5px;
+}
+
+
+/* ---------------------------------------------------*/
+/* TESTIMONIALS */
+/* ---------------------------------------------------*/
+
+.section-testimonials {
+    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(images/back-customers.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(images/back-customers.jpg);
+    background-size: cover; /* fills up the whole section */
+    color: white;
+    background-attachment: fixed;
+}
+
+blockquote {
+    padding: 2%;
+    font-style: italic; /* we can only do this because we included it from google fonts*/
+    line-height: 145%;
+    position: relative;
+    margin-top: 40px;
+}
+
+cite {
+    font-size: 90%;
+    margin-top: 25px;
+    display:  block; /* makes all the images go on a seperate line*/
+}
+
+blockquote:before {
+    content: "\201C"; /* got this from website css-tricks.com/snippets/glyphs*/
+    font-size: 500%;
+    display:block;
+    position: absolute;
+    top: -5px;
+    left:-3px;
+}
+
+cite img {
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+
+/* ---------------------------------------------------*/
+/* PLANS */
+/* ---------------------------------------------------*/
+
+.section-plans {
+    background-color: #f4f4f4;
+}
+
+.plan-box {
+    background-color: #fff;
+    border-radius: 5px;
+    width: 90%;
+    margin-left: 5%;
+    box-shadow: 0 2px 2px #efefef;
+}
+
+.plan-box div {
+    padding: 15px;
+    border-bottom: 1px solid #e8e8e8
+}
+
+
+.plan-box div:first-child {
+    background-color: #fcfcfc;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.plan-box div:last-child {
+    text-align: center;
+    border: 0;
+}
+
+.plan-price {
+    font-size: 300%;
+    margin-bottom: 10px;
+    font-weight: 100;
+    color: #e67e22
+}
+
+.plan-price span {
+    font-size: 30%;
+    font-weight: 300;
+}
+
+.plan-box ul {
+    list-style: none;
+}
+
+.plan-box ul li{
+    padding: 5px 0;
+}
+
+.plan-price-meal {
+    font-size: 80%;
+}
+
+/* ---------------------------------------------------*/
+/* FORM */
+/* ---------------------------------------------------*/
+
+.contact-form {
+    width: 60%;
+    margin: 0 auto; /*Centers contact form*/
+}
+
+input[type=text, type=email],
+select,
+textarea {
+    width: 100%;
+    padding: 7px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+textarea {
+    height: 100px;
+}
+
+input[type=checkbox] {
+    margin: 10px 5px 10px 0;
+}
+
+*:focus {
+    outline: none;
+}
+
+/* ---------------------------------------------------*/
+/* FOOTER */
+/* ---------------------------------------------------*/
+
+footer {
+    background-color: #333;
+    padding: 60px;
+    font-size: 80%;
+}
+
+footer p{
+    color: #888;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 90%;
+}
+
+.footer-nav {
+    list-style: none;
+    float: left;
+}
+
+.social-links {
+    list-style: none;
+    float: right;
+}
+
+.footer-nav li,
+.social-links li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.footer-nav li:last-child,
+.social-links li:last-child {
+    margin: 0;
+}
+
+.footer-nav a:link,
+.footer-nav a:visited,
+.social-links a:link,
+.social-links a:visited{
+    border: 0;
+    color: #888;
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+}
+
+.footer-nav a:hover,
+.footer-nav a:active,
+.social-links a:hover,
+.social-links a:active{
+    border: 0;
+    color: #ddd;
+}
+
+/*social media colors - designpieces.com*/
+
+.social-links li a:link,
+.social-links li a:visited {
+    font-size: 150%;
+}
+
+.ion-social-facebook,
+.ion-social-twitter,
+.ion-social-googleplus,
+.ion-social-instagram {
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+}
+
+.ion-social-facebook:hover {
+    color: #3b5998;
+}
+
+.ion-social-twitter:hover {
+    color: #00aced;
+}
+
+.ion-social-googleplus:hover {
+    color: #dd4b39;
+}
+
+.ion-social-instagram:hover {
+    color: #517fa4;
+}
+
+/*****************/
+/*Animations*/
+/*****************/
+
+.js--wp-1,
+.js--wp-2,
+.js--wp-3 {
+    opacity: 0;
+    animation-duration: 1s;
+}
+
+.js--wp-4 {
+    animation-duration: 1s;
+}
+
+.js--wp-1 .animated,
+.js--wp-2 .animated,
+.js--wp-3 .animated {
+    opacity: 1;
+}

@@ -62,7 +62,8 @@ header {
     height: 150px;
     width: auto;
     float: left;
-    margin-top: 30px;
+    margin-top: 20px;
+    margin-left: -20px;
 }
 
 .logo-black {
@@ -102,6 +103,19 @@ header {
     border-bottom: 2px solid #e67e22;
 }
 
+.nav-btns {
+    float: right;
+    margin-top: 10px;
+    text-align: center;
+    height: 100%;
+    vertical-align: top;
+    visibility: hidden;
+}
+
+.hide {
+    /*visibility: hidden;*/
+}
+
 /*sticky navigation */
 .sticky {
     position: fixed; /* nav statys at same point*/
@@ -111,6 +125,10 @@ header {
     background-color: rgba(255, 255, 255, 0.98);
     box-shadow: 0 2px 2px #efefef;
     z-index: 9999; /*brings items to the front*/
+}
+
+.sticky-nav-btns .nav-btns{
+    visibility: visible;
 }
 
 .sticky .main-nav {

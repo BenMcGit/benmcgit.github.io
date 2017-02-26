@@ -114,5 +114,13 @@
     
     .contact-form { width: 100%; }
     
+    .btn-nav {
+        position: absolute;
+        top: 25%;
+        left: 50%;
+    }
     
+    .btn-resume {
+        visibility: hidden;
+    }
 }

@@ -9,8 +9,10 @@ $(document).ready(function() {
     $('.js--section-features').waypoint(function(direction) {
         if(direction === "down") {
             $('nav').addClass('sticky');
+            $('nav').addClass('sticky-nav-btns');
         } else {
             $('nav').removeClass('sticky');
+            $('nav').removeClass('sticky-nav-btns');
         }
     }, {
         offset: '110px;' /* this event will occur 60px before the section-features*/
@@ -25,6 +27,9 @@ $(document).ready(function() {
     });
     $('.js--scroll-to-features').click(function() {
        $('html, body').animate({scrollTop: $('.js--section-features').offset().top}, 1000 /*speed in ms*/) 
+    });
+    $('.js--scroll-to-form').click(function() {
+       $('html, body').animate({scrollTop: $('.js--section-form').offset().top}, 1000 /*speed in ms*/) 
     });
     
     /* more smooth scrolling https://css-tricks.com/snippets/jquery/smooth-scrolling/ */
